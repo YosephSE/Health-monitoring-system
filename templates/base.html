@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title%}{% endblock %}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="navbar-brand" href="about">About</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <a href="signin" class="btn btn-outline-primary my-2 my-sm-0">Sign In</a>
+      </form>
+    </div>
+  </nav>
+  {% block webcontent %}
+  {% endblock %}
+
+  <footer class="bg-dark text-white py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <h3 class="text-uppercase mb-4">Contact Us</h3>
+          <ul class="list-unstyled">
+            <li>
+              <i class="fas fa-map-marker-alt mr-3">Addis Ababa, Ethiopia</i>
+            </li>
+            <li>
+              <i class="fas fa-phone mr-3">+251900000000</i>
+            </li>
+            <li>
+              <i class="fas fa-envelope mr-3">info@hospital.com</i> 
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h3 class="text-uppercase mb-4">About Us</h3>
+          <p>Ethiopia is a country located in the Horn of Africa. 
+            It is one of the oldest countries in the world, with 
+            a rich cultural heritage and history dating back 
+            thousands of years. With a population of over 110 
+            million people, Ethiopia is the most populous landlocked 
+            country in the world and the second-most populous in 
+            Africa. The country is known for its diverse geography, 
+            including highlands, deserts, and tropical forests. 
+            The official languages of Ethiopia are Amharic and 
+            Oromo, and the country is predominantly Christian, 
+            with a significant Muslim minority. Ethiopia is also 
+            one of the fastest-growing economies in Africa and 
+            is considered a hub for innovation and entrepreneurship 
+            on the continent.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

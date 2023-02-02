@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>{% block title %} About {% endblock %}</title>
+</head>
+<body>
+    {% block webcontent %}
+    <div class="container text-center mt-5 p-3">
+        <h2 class="text-center font-weight-bold">Ethiopia</h2>
+        <p class="text-justify mt-3 p-3">Ethiopia is a country located in the Horn of Africa. 
+        It is one of the oldest countries in the world, with 
+        a rich cultural heritage and history dating back 
+        thousands of years. With a population of over 110 
+        million people, Ethiopia is the most populous landlocked 
+        country in the world and the second-most populous in 
+        Africa. The country is known for its diverse geography, 
+        including highlands, deserts, and tropical forests. 
+        The official languages of Ethiopia are Amharic and 
+        Oromo, and the country is predominantly Christian, 
+        with a significant Muslim minority. Ethiopia is also 
+        one of the fastest-growing economies in Africa and 
+        is considered a hub for innovation and entrepreneurship 
+        on the continent.</p>
+    </div>
+    {% endblock %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
