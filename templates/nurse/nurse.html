@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Nurse {% endblock %}</title>
+</head>
+<body>
+{% block webcontent %}
+<header class="text-center d-flex align-items-center bg-primary py-3">
+    <h1 class="text-white mx-auto">This is the nurse control panel</h1>
+  </header>
+  <hr>
+  <div class="d-flex flex-column align-items-center mx-auto" style="width: 50%; height: 50%;">
+      <button class="btn btn-success btn-lg m-3" style="width: 100%;"><a href="{{ url_for('patient_list') }}">Patient</a></button>
+      <button class="btn btn-success btn-lg m-3" style="width: 100%;"><a href="{{ url_for('nurse_pre')}}">Prescription</a></button>
+      <button class="btn btn-success btn-lg m-3" style="width: 100%;"><a href="{{ url_for('news') }}">News</a></button>
+      <button class="btn btn-danger btn-lg m-3" style="width: 100%;">Sign out</button>
+    </div>
+    <hr>
+{% endblock %}
+</body>
+</html>

@@ -9,8 +9,11 @@
 </head>
 <body>
 {% block webcontent %}
-<img src=".\pic.jpg" alt="loading"/>
-<p>this is the home page</p>
+<header class="text-center d-flex align-items-center bg-primary py-3">
+    <h1 class="text-white mx-auto">Welcome to home</h1>
+  </header>
+  <h1>The content of the home page will display here!!!</h1>
+  <img src="{{ url_for('static', filename='img/1.ico') }}" alt="loading">
 {% endblock %}
 </body>
 </html>

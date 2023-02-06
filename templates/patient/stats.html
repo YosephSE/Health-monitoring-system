@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Patient stats {% endblock %}</title>
+</head>
+<body>
+{% block webcontent %}
+<header class="text-center d-flex align-items-center bg-primary py-3">
+    <h1 class="text-white mx-auto">Here is your recent stats</h1>
+  </header>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Day</th>
+        <th>Temperature</th>
+        <th>Pulse rate</th>
+      </tr>
+    </thead>
+    {% for i in %}
+    <tbody>
+  </table>
+{% endblock %}
+</body>
+</html>

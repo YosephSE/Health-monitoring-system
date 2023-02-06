@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>{% block title %} Add new account {% endblock %}</title>
+  </head>
+  <body>
+    {% block webcontent %}
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h3 class="text-center, ">Add Doctor</h3>
+          <hr>
+          <form action="/new_account" method="post" >
+            <div class="form-group">
+              <label for="first_name">First name:</label>
+              <input type="text" class="form-control" id="first_name" name="first_name" required>
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last name:</label>
+              <input type="text" class="form-control" id="last_name" name="last_name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+              <hr>
+              <hr>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">Add Doctor</button>
+            </div>
+            <hr>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for doctor in doctors: %}
+        <tr>
+          <td>{{doctor[0]}}</td>
+          <td>{{doctor[1]}}</td>
+          <td>{{doctor[2]}}</td>
+
+          <td>
+            <a href="{{ url_for('dele', id=doctor[0]) }}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>  
+    {% endblock %}
+  </body>
+</html>

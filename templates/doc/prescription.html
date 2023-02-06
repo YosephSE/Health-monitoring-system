@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Prescription {% endblock %}</title>
+</head>
+<body>
+{% block webcontent %}
+<header class="text-center d-flex align-items-center bg-primary py-3">
+    <h1 class="text-white mx-auto">Prescription</h1>
+  </header>
+  <hr>
+  <form action="/prescription" method="post">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div style="width: 75%;">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Search patient" name="patient_search">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Go</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5">
+      <div class="form-group">
+        <textarea class="form-control" rows="10" placeholder="Write prescription" name="prescription"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send</button>
+      <hr>
+    </div>
+  </form>
+{% endblock %}
+</body>
+</html>

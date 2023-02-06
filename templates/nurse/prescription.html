@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Prescription {% endblock %}</title>
+</head>
+<body>
+{% block webcontent %}
+<header class="text-center d-flex align-items-center bg-primary py-3">
+    <h1 class="text-white mx-auto">Prescription</h1>
+</header>
+<hr>
+<div class="container mt-5">
+    <div class="row">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Patient Name</th>
+            <th scope="col">Prescription</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in pres: %}
+          <tr>
+            <td>{{p[0]}}</td>
+            <td>{{p[1]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
+</body>
+</html>

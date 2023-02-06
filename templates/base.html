@@ -8,15 +8,18 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Home</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+    <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='img/favicon.ico') }}" alt="loading" width="60px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="navbar-brand" href="about">About</a>
+          <a class="navbar-brand" href="about">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="news">News</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -46,20 +49,14 @@
         </div>
         <div class="col-md-6">
           <h3 class="text-uppercase mb-4">About Us</h3>
-          <p>Ethiopia is a country located in the Horn of Africa. 
-            It is one of the oldest countries in the world, with 
-            a rich cultural heritage and history dating back 
-            thousands of years. With a population of over 110 
-            million people, Ethiopia is the most populous landlocked 
-            country in the world and the second-most populous in 
-            Africa. The country is known for its diverse geography, 
-            including highlands, deserts, and tropical forests. 
-            The official languages of Ethiopia are Amharic and 
-            Oromo, and the country is predominantly Christian, 
-            with a significant Muslim minority. Ethiopia is also 
-            one of the fastest-growing economies in Africa and 
-            is considered a hub for innovation and entrepreneurship 
-            on the continent.</p>
+          <p>Our mission is to empower individuals all around the world to take control 
+            of their own health. Our website provides our users with the tools to assess 
+            health status and receive personalised recommendations for follow up care if 
+            they display symptoms of a disease. It also addresses the needs of individuals 
+            living in rural  areas by an established system that connects them  with the 
+            doctors for remote consultation.<br>
+            Health for all !
+          </p>
         </div>
       </div>
     </div>

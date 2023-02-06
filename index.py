@@ -1,6 +1,15 @@
 from flask import Flask, request, render_template, redirect, url_for
+from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = '1212'
+app.config['MYSQL_DB'] = 'comma_patient'
+
+mysql = MySQL(app)
+
 
 @app.route("/")
 def home():
@@ -13,7 +22,7 @@ def signup():
         last_name = request.form["last_name"]
         username = request.form["email"]
         password = request.form["password"]
-        
+    
         return redirect(url_for("home"))
         
     return render_template("signup.html")
@@ -37,34 +46,142 @@ def admin():
     if False:
         return redirect(url_for('home'))
 
-    return render_template('admin.html')
+    return render_template('admin/admin.html')
 
 @app.route('/doctor')
 def doctor():
     if False:
         return redirect(url_for('home'))
 
-    return render_template('doctor.html')
+    return render_template('doc/doctor.html')
 
 @app.route('/nurse')
 def nurse():
     if False:
         return redirect(url_for('home'))
 
-    return render_template('nurse.html')
+    return render_template('nurse/nurse.html')
 
 @app.route('/patient')
 def patient():
     if False:
         return redirect(url_for('home'))
 
-    return render_template('patient.html')
+    return render_template('patient/patient.html')
 
 @app.route('/<name>')
 def lost(name):
-    return redirect(url_for('home'))
+    return '<h1>not available</h1>'
 
+@app.route('/new_account', methods=['GET', 'POST'])
+def new_account():
+    if request.method == "POST":
+        name = request.form["first_name"] + ' ' + request.form["last_name"]
+        email = request.form["email"]
+        password = request.form["password"]
+        cur0 = mysql.connection.cursor()
+        cur0.execute("INSERT INTO doctors (Name, Email, Password) VALUES (%s, %s, %s)", (name, email, password))
+        mysql.connection.commit()
+        cur0.close()    
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM doctors")
+    doctors = cur.fetchall()
+    cur.close()
+    return render_template('admin/admin_tool/new_account.html', doctors = doctors)
+
+@app.route('/add_patient', methods=['GET', 'POST'])
+def add_patient():
+    if request.method == "POST":
+        name = request.form["first_name"] + ' ' + request.form["last_name"]
+        email = request.form["email"]
+        password = request.form["password"]
+        cur0 = mysql.connection.cursor()
+        cur0.execute("INSERT INTO patient (Name, Email, Password) VALUES (%s, %s, %s)", (name, email, password))
+        mysql.connection.commit()
+        cur0.close()    
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM patient")
+    patient = cur.fetchall()
+    cur.close()
+    return render_template('admin/admin_tool/add_patient.html', patient = patient)
+
+@app.route('/news')
+def news():
+    return render_template("news.html")
+
+@app.route('/patient_list')
+def patient_list():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM patient")
+    patient = cur.fetchall()
+    cur.close()
+    return render_template('doc/patient_list.html', patient = patient)
+
+@app.route('/prescription', methods=['GET', 'POST'])
+def prescription():
+    if request.method == "POST":
+        name = request.form["patient_search"]
+        pres = request.form["prescription"]
+        cur0 = mysql.connection.cursor()
+        cur0.execute("INSERT INTO prescriptions (Name, Prescription) VALUES (%s, %s)", (name, pres))
+        mysql.connection.commit()
+        cur0.close()
+    return render_template('doc/prescription.html')
+@app.route('/nurse_pre')
+def nurse_pre():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM prescriptions")
+    pres = cur.fetchall()
+    cur.close()
+    return render_template('nurse/prescription.html', pres = pres)
+
+
+@app.route('/stats')
+def stats():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM doctors")
+    fetchdata = cur.fetchall()
+    cur.close()
+    return render_template('patient/stats.html', fetchdata = fetchdata)
+
+@app.route('/delete/<int:id>', methods=['GET', 'POST'])
+def delete(id):
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM patient WHERE id=%s", (id,))
+    mysql.connection.commit()
+    return redirect(url_for('add_patient'))
+
+@app.route('/dele/<int:id>', methods=['GET', 'POST'])
+def dele(id):
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM doctors WHERE id=%s", (id,))
+    mysql.connection.commit()
+    return redirect(url_for('new_account'))
+
+@app.route('/delnur/<int:id>', methods=['GET', 'POST'])
+def delenur(id):
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM nurse WHERE id=%s", (id,))
+    mysql.connection.commit()
+    return redirect(url_for('new_nurse'))
+
+@app.route('/new_nurse', methods=['GET', 'POST'])
+def new_nurse():
+    if request.method == "POST":
+        name = request.form["first_name"] + ' ' + request.form["last_name"]
+        email = request.form["email"]
+        password = request.form["password"]
+        cur0 = mysql.connection.cursor()
+        cur0.execute("INSERT INTO nurse (Name, Email, Password) VALUES (%s, %s, %s)", (name, email, password))
+        mysql.connection.commit()
+        cur0.close()    
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM nurse")
+    nurse = cur.fetchall()
+    cur.close()
+    return render_template('admin/admin_tool/new_nurse.html', nurse = nurse)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
