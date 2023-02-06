@@ -15,26 +15,33 @@ mysql = MySQL(app)
 def home():
     return render_template("index.html")
 
-@app.route("/signup", methods=["GET", "POST"])
-def signup():
-    if request.method == "POST":
-        first_name = request.form["first_name"]
-        last_name = request.form["last_name"]
-        username = request.form["email"]
-        password = request.form["password"]
-    
-        return redirect(url_for("home"))
-        
-    return render_template("signup.html")
-
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
     if request.method == "POST":
-        username = request.form["email"]
+        email = request.form["email"]
         password = request.form["password"]
-        
-        return redirect(url_for("home"))
-        
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT Email FROM doctors")
+        doctors = cur.fetchall()
+        cur.close()
+        doctor = [row[0] for row in doctors]
+        cur1 = mysql.connection.cursor()
+        cur1.execute("SELECT Email FROM nurse")
+        nurses = cur1.fetchall()
+        cur1.close()
+        nurse = [row[0] for row in nurses]
+        cur2 = mysql.connection.cursor()
+        cur2.execute("SELECT Email FROM patient")
+        patients = cur2.fetchall()
+        cur2.close()
+        patient = [row[0] for row in patients]
+        if email in doctor:
+            return redirect(url_for("doctor"))
+        if email in nurse:
+            return redirect(url_for("nurse"))
+        if email in patient:
+            return redirect(url_for('patient'))
+               
     return render_template("signin.html")
 
 @app.route("/about")
@@ -71,7 +78,7 @@ def patient():
 
 @app.route('/<name>')
 def lost(name):
-    return '<h1>not available</h1>'
+    return redirect(url_for('home'))
 
 @app.route('/new_account', methods=['GET', 'POST'])
 def new_account():
