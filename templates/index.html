@@ -10,10 +10,25 @@
 <body>
 {% block webcontent %}
 <header class="text-center d-flex align-items-center bg-primary py-3">
-    <h1 class="text-white mx-auto">Welcome to home</h1>
+    <h2 class="text-white mx-auto">Welcome to home</h2>
   </header>
-  <h1>The content of the home page will display here!!!</h1>
-  <img src="{{ url_for('static', filename='img/1.ico') }}" alt="loading">
+  <h3 class="text-center align-items-center ">"Empowering Health, Improving Lives."</h3>
+  <p class="text-center align-items-center" style="width: 70%;">A health monitoring 
+    system is a system that collects, 
+    stores and analyzes various health-related data such as 
+    vital signs, physical activity, diet, and medication intake, 
+    to provide a comprehensive view of an individual's health 
+    status. It enables patients to track their health progress 
+    and physicians to monitor their patients' health remotely, 
+    improving the efficiency and quality of healthcare delivery. 
+    The system typically includes wearable devices, mobile apps, 
+    and cloud-based platforms that securely store and analyze the 
+    collected data, allowing for real-time monitoring and early 
+    detection of potential health issues. With the increasing 
+    trend towards patient-centered healthcare, health monitoring 
+    systems play a crucial role in empowering patients to take 
+    control of their health and promoting better outcomes.</p>
+  <img class="align-items-center" src="{{ url_for('static', filename='img/pic.jpg') }}" alt="loading" width="90%" height="50%">
 {% endblock %}
 </body>
 </html>
