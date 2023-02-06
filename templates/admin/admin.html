@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "admin/base.html" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,17 +14,16 @@
   <h1 class="text-white mx-auto">This is the admins control panel</h1>
 </header>
 <hr>
-  <div class="d-flex flex-column align-items-center mx-auto" style="width: 50%; height: 50%;">
-    <button class="btn btn-success btn-lg m-3" style="width: 100%;">
-      <a href="{{ url_for('new_account') }}">Create account</a>
-    </button>
-    <button class="btn btn-success btn-lg m-3" style="width: 100%;"><a href="{{ url_for('add_patient') }}">Patient regstration</a></button>
-    <button class="btn btn-success btn-lg m-3" style="width: 100%;">
-      <a href="{{ url_for('news') }}">News</a>
-    </button>
-    <button class="btn btn-danger btn-lg m-3" style="width: 100%;">Sign out</button>
-  </div>
-  
+<p class="text-center justify-content-center" > Artificial intelligence (AI) 
+  is transforming the way we live, work and interact. From chatbots to 
+  self-driving cars, AI is impacting nearly every industry and aspect of 
+  our lives. With its ability to analyze vast amounts of data and make 
+  predictions with high accuracy, AI is helping companies improve efficiency,
+  make better decisions and create new and innovative products. As AI
+  technology continues to advance, we can expect to see even more 
+  amazing and groundbreaking applications in the future, changing 
+  our world in ways we can't even imagine.</p>
+
 <hr>
   
 {% endblock %}

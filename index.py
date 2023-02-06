@@ -10,7 +10,6 @@ app.config['MYSQL_DB'] = 'comma_patient'
 
 mysql = MySQL(app)
 
-
 @app.route("/")
 def home():
     return render_template("index.html")
