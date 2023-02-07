@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Prescription {% endblock %}</title>
+    <title>{% block title %} Recommendation {% endblock %}</title>
 </head>
 <body>
 {% block webcontent %}
 <header class="text-center d-flex align-items-center bg-primary py-3">
-    <h1 class="text-white mx-auto">Prescription</h1>
+    <h1 class="text-white mx-auto">Recommendation</h1>
   </header>
   <hr>
-  <form action="/prescription" method="post">
+  <form action="/recommendation" method="post">
     <div class="d-flex justify-content-center align-items-center h-100">
       <div style="width: 75%;">
         <div class="input-group mb-3">
@@ -26,7 +26,7 @@
     </div>
     <div class="container mt-5">
       <div class="form-group">
-        <textarea class="form-control" rows="10" placeholder="Write prescription" name="prescription"></textarea>
+        <textarea class="form-control" rows="10" placeholder="Write Recommendation" name="recommendation"></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Send</button>
       <hr>

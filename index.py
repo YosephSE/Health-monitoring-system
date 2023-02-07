@@ -51,6 +51,10 @@ def about():
 def admin_about():
     return render_template('admin/about.html')
 
+@app.route("/doctor_about")
+def doctor_about():
+    return render_template('doc/about.html')
+
 @app.route('/admin')
 def admin():
     if False:
@@ -123,6 +127,10 @@ def news():
 def admin_news():
     return render_template("admin/news.html")
 
+@app.route('/doctor_news')
+def doctor_news():
+    return render_template("doc/news.html")
+
 @app.route('/patient_list')
 def patient_list():
     cur = mysql.connection.cursor()
@@ -141,6 +149,18 @@ def prescription():
         mysql.connection.commit()
         cur0.close()
     return render_template('doc/prescription.html')
+
+@app.route('/recommendation', methods=['GET', 'POST'])
+def recommendation():
+    if request.method == "POST":
+        name = request.form["patient_search"]
+        reco = request.form["recommendation"]
+        cur0 = mysql.connection.cursor()
+        cur0.execute("INSERT INTO recommendation (Name, Recommendation) VALUES (%s, %s)", (name, reco))
+        mysql.connection.commit()
+        cur0.close()
+    return render_template('doc/recommendation.html')
+
 @app.route('/nurse_pre')
 def nurse_pre():
     cur = mysql.connection.cursor()
