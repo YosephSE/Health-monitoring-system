@@ -1,0 +1,41 @@
+{% extends 'patient/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>{% block title %} About {% endblock %}</title>
+</head>
+<body>
+    {% block webcontent %}
+    <br><br>
+    <div class="d-flex justify-content-center">
+        <div class="card" style="width: 50%">
+          <div class="card-body">
+            <h5 class="card-title">About us</h5>
+            <p class="card-text text-justify">
+        "We are a group of motivated and talented individuals from various high
+        schools in Addis Ababa, Ethiopia. We recently participated in a 3-week
+        Brighter Generation Python Programming Bootcamp, where we honed our
+        skills and developed a groundbreaking health monitoring system as part
+        of our community impact project. Our goal is to not only make a positive
+        impact in the health sector, but to use our skills and creativity to
+        solve other pressing problems within our community. With a drive for
+        excellence and a passion for making a difference, we strive to create
+        innovative and sustainable solutions for the betterment of our society.
+        Our team is dedicated to using technology for social good and we are
+        excited to continue making an impact."
+      </p>
+      </div>
+    </div>
+    </div>      
+    <br><br>
+    {% endblock %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

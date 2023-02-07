@@ -1,23 +1,35 @@
-{% extends "base.html"%}
+{% extends "patient/base.html"%}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Patient control panel{% endblock %}</title>
-</head>
-<body>
-{% block webcontent %}
-<header class="text-center d-flex align-items-center bg-primary py-3">
-    <h1 class="text-white mx-auto">This is the patients control panel</h1>
-  </header>
-  <hr>
-  <div class="d-flex flex-column align-items-center mx-auto" style="width: 50%; height: 50%;">
-      <button class="btn btn-success btn-lg m-3" style="width: 100%;"><a href="{{url_for('stats')}}">Stats</a></button>
-      <button class="btn btn-danger btn-lg m-3" style="width: 100%;">Sign out</button>
+  </head>
+  <body>
+    {% block webcontent %}
+    <header class="text-center d-flex align-items-center bg-success py-3">
+      <h1 class="text-white mx-auto">This is the patients control panel</h1>
+    </header>
+    <br><br>
+    <div class="d-flex justify-content-center">
+      <div class="card" style="width: 50%">
+        <div class="card-body">
+          <h5 class="card-title">Health Monitoring System</h5>
+          <p class="card-text text-justify">
+            Welcome to the Health Monitoring System, where you can keep track of
+            your own health and medical information. As a patient, you can
+            access and manage your health records, view your health reports, and
+            stay informed about your progress. With these resources at your
+            disposal, you can stay on top of your health and work closely with
+            your healthcare provider to achieve optimal health. We hope that you
+            find this system useful and helpful in your health journey.
+          </p>
+        </div>
+      </div>
     </div>
-    <hr>
-{% endblock %}
-</body>
+    <br><br>
+    {% endblock %}
+  </body>
 </html>

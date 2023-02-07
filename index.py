@@ -59,6 +59,10 @@ def doctor_about():
 def nurse_about():
     return render_template('nurse/about.html')
 
+@app.route("/pat_about")
+def pat_about():
+    return render_template('patient/about.html')
+
 @app.route('/admin')
 def admin():
     if False:
@@ -198,6 +202,14 @@ def recommendation():
         cur0.close()
     return render_template('doc/recommendation.html')
 
+@app.route('/rec')
+def rec():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM recommendation")
+    rec = cur.fetchall()
+    cur.close()
+    return render_template('patient/rec.html', rec = rec)
+
 @app.route('/nurse_pre')
 def nurse_pre():
     cur = mysql.connection.cursor()
@@ -245,7 +257,7 @@ def new_nurse():
         cur0 = mysql.connection.cursor()
         cur0.execute("INSERT INTO nurse (Name, Email, Password) VALUES (%s, %s, %s)", (name, email, password))
         mysql.connection.commit()
-        cur0.close()    
+        cur0.close()
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM nurse")
     nurse = cur.fetchall()
