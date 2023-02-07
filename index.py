@@ -55,6 +55,10 @@ def admin_about():
 def doctor_about():
     return render_template('doc/about.html')
 
+@app.route("/nurse_about")
+def nurse_about():
+    return render_template('nurse/about.html')
+
 @app.route('/admin')
 def admin():
     if False:
@@ -148,6 +152,14 @@ def doctor_news():
     cur.close()
     return render_template("doc/news.html", news = news)
 
+@app.route('/nurse_news')
+def nurse_news():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM news")
+    news = cur.fetchall()
+    cur.close()
+    return render_template("nurse/news.html", news = news)
+
 @app.route('/patient_list')
 def patient_list():
     cur = mysql.connection.cursor()
@@ -155,6 +167,14 @@ def patient_list():
     patient = cur.fetchall()
     cur.close()
     return render_template('doc/patient_list.html', patient = patient)
+
+@app.route('/nursepatient_list')
+def nursepatient_list():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM patient")
+    patient = cur.fetchall()
+    cur.close()
+    return render_template('nurse/patient_list.html', patient = patient)
 
 @app.route('/prescription', methods=['GET', 'POST'])
 def prescription():

@@ -1,0 +1,48 @@
+{% extends 'nurse/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} News {% endblock %}</title>
+</head>
+<body>
+{% block webcontent %}
+<header class="text-center d-flex align-items-center bg-success py-3">
+  <h1 class="text-white mx-auto font-weight-bold">News</h1>
+</header>
+<br><br>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Monday</th>
+      <th scope="col">Tuesday</th>
+      <th scope="col">Wednesday</th>
+      <th scope="col">Thursday</th>
+      <th scope="col">Friday</th>
+      <th scope="col">Saturday</th>
+      <th scope="col">Sunday</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for new in news: %}
+      <tr>
+        <td>{{new[0]}}</td>
+        <td>{{new[1]}}</td>
+        <td>{{new[2]}}</td>
+        <td>{{new[3]}}</td>
+        <td>{{new[4]}}</td>
+        <td>{{new[5]}}</td>
+        <td>{{new[6]}}</td>
+        <td>{{new[7]}}</td>
+        <td>{{new[8]}}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+<br><br>
+{% endblock %}
+</body>
+</html>
