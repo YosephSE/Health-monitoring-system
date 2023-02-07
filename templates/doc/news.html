@@ -13,16 +13,35 @@
   <h1 class="text-white mx-auto font-weight-bold">News</h1>
 </header>
 <br><br>
-<div class="d-flex justify-content-center">
-<div class="card" style="width: 50%;">
-  <div class="card-body">
-    <h5 class="card-title">Health Monitoring System</h5>
-    <p class="card-text text-justify">
-      Welcome to the Health Monitoring System, where you can track and manage the health records of your patients. As an administrator, you have the power to access and manage all patient data, as well as control the user accounts. You can add, edit, and delete patient information, view health reports, and generate statistics to monitor the overall health of your patients. With these tools, you can ensure the best possible care for your patients, and provide them with the resources they need to stay healthy and informed. We trust that you will use these privileges responsibly and to the best of your abilities.
-    </p>
-  </div>
-</div>
-</div>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Monday</th>
+      <th scope="col">Tuesday</th>
+      <th scope="col">Wednesday</th>
+      <th scope="col">Thursday</th>
+      <th scope="col">Friday</th>
+      <th scope="col">Saturday</th>
+      <th scope="col">Sunday</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for new in news: %}
+      <tr>
+        <td>{{new[0]}}</td>
+        <td>{{new[1]}}</td>
+        <td>{{new[2]}}</td>
+        <td>{{new[3]}}</td>
+        <td>{{new[4]}}</td>
+        <td>{{new[5]}}</td>
+        <td>{{new[6]}}</td>
+        <td>{{new[7]}}</td>
+        <td>{{new[8]}}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
 <br><br>
 {% endblock %}
 </body>

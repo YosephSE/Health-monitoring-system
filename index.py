@@ -123,13 +123,30 @@ def add_patient():
 def news():
     return render_template("news.html")
 
-@app.route('/admin_news')
+@app.route('/admin_news', methods=['GET', 'POST'])
 def admin_news():
+    if request.method == "POST":
+        name = request.form["name"]
+        mon = request.form["monday"]
+        tue = request.form["tuesday"]
+        wed = request.form["wednesday"]
+        thu = request.form["thursday"]
+        fri = request.form["friday"]
+        sat = request.form["saturday"]
+        sun = request.form["sunday"]
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO news (Name, monday, tuesday, wednesday, thursday, friday, saturday, sunday) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (name, mon, tue, wed, thu, fri, sat, sun))
+        mysql.connection.commit()
+        cur.close()
     return render_template("admin/news.html")
 
 @app.route('/doctor_news')
 def doctor_news():
-    return render_template("doc/news.html")
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM news")
+    news = cur.fetchall()
+    cur.close()
+    return render_template("doc/news.html", news = news)
 
 @app.route('/patient_list')
 def patient_list():
