@@ -47,6 +47,10 @@ def signin():
 def about():
     return render_template('about.html')
 
+@app.route("/admin_about")
+def admin_about():
+    return render_template('admin/about.html')
+
 @app.route('/admin')
 def admin():
     if False:
@@ -114,6 +118,10 @@ def add_patient():
 @app.route('/news')
 def news():
     return render_template("news.html")
+
+@app.route('/admin_news')
+def admin_news():
+    return render_template("admin/news.html")
 
 @app.route('/patient_list')
 def patient_list():
