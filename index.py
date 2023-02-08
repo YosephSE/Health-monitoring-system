@@ -20,26 +20,29 @@ def signin():
         email = request.form["email"]
         password = request.form["password"]
         cur = mysql.connection.cursor()
-        cur.execute("SELECT Email FROM doctors")
+        cur.execute("SELECT Email, Password FROM doctors")
         doctors = cur.fetchall()
         cur.close()
-        doctor = [row[0] for row in doctors]
+
         cur1 = mysql.connection.cursor()
-        cur1.execute("SELECT Email FROM nurse")
+        cur1.execute("SELECT Email, Password FROM nurse")
         nurses = cur1.fetchall()
         cur1.close()
-        nurse = [row[0] for row in nurses]
+       
         cur2 = mysql.connection.cursor()
-        cur2.execute("SELECT Email FROM patient")
+        cur2.execute("SELECT Email, Password FROM patient")
         patients = cur2.fetchall()
         cur2.close()
-        patient = [row[0] for row in patients]
-        if email in doctor:
-            return redirect(url_for("doctor"))
-        if email in nurse:
-            return redirect(url_for("nurse"))
-        if email in patient:
-            return redirect(url_for('patient'))
+        
+        for doctor in doctors:
+            if email in doctor and password in doctor:
+                return redirect(url_for("doctor"))
+        for nurse in nurses:
+            if email in nurse and password in nurse:
+                return redirect(url_for("nurse"))
+        for patient in patients:
+            if email in patient and password in patient:
+                return redirect(url_for('patient'))
                
     return render_template("signin.html")
 
