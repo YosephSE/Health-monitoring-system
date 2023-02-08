@@ -34,6 +34,11 @@ def signin():
         cur2.execute("SELECT Email, Password FROM patient")
         patients = cur2.fetchall()
         cur2.close()
+
+        cur3 = mysql.connection.cursor()
+        cur3.execute("SELECT Email, Password FROM admin")
+        admins = cur3.fetchall()
+        cur3.close()
         
         for doctor in doctors:
             if email in doctor and password in doctor:
@@ -50,12 +55,19 @@ def signin():
                 session['email'] = email
                 session['role'] = 'pat'
                 return redirect(url_for('patient'))
+        for admin in admins:
+            if email in admin and password in admin:
+                session['email'] = email
+                session['role'] = 'adm'
+                return redirect(url_for('admin'))
                
     return render_template("signin.html")
 
 
 @app.route("/admin_about")
 def admin_about():
+    if 'email' not in session or session.get('role', '') != 'adm':
+        return redirect(url_for('signin'))
     return render_template('admin/about.html')
 
 @app.route("/doctor_about")
@@ -78,8 +90,8 @@ def pat_about():
 
 @app.route('/admin')
 def admin():
-    if False:
-        return redirect(url_for('home'))
+    if 'email' not in session or session.get('role', '') != 'adm':
+        return redirect(url_for('signin'))
 
     return render_template('admin/admin.html')
 
@@ -109,6 +121,8 @@ def lost(name):
 
 @app.route('/new_account', methods=['GET', 'POST'])
 def new_account():
+    if 'email' not in session or session.get('role', '') != 'adm':
+        return redirect(url_for('signin'))
     if request.method == "POST":
         name = request.form["first_name"] + ' ' + request.form["last_name"]
         email = request.form["email"]
@@ -125,6 +139,8 @@ def new_account():
 
 @app.route('/add_patient', methods=['GET', 'POST'])
 def add_patient():
+    if 'email' not in session or session.get('role', '') != 'adm':
+        return redirect(url_for('signin'))
     if request.method == "POST":
         name = request.form["first_name"] + ' ' + request.form["last_name"]
         email = request.form["email"]
@@ -141,6 +157,8 @@ def add_patient():
 
 @app.route('/admin_news', methods=['GET', 'POST'])
 def admin_news():
+    if 'email' not in session or session.get('role', '') != 'adm':
+        return redirect(url_for('signin'))
     if request.method == "POST":
         name = request.form["name"]
         mon = request.form["monday"]
@@ -255,6 +273,8 @@ def stats():
 
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
+    if 'email' not in session or session.get('role', '') != 'adm':
+        return redirect(url_for('signin'))
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM patient WHERE id=%s", (id,))
     mysql.connection.commit()
@@ -262,6 +282,8 @@ def delete(id):
 
 @app.route('/dele/<int:id>', methods=['GET', 'POST'])
 def dele(id):
+    if 'email' not in session or session.get('role', '') != 'adm':
+        return redirect(url_for('signin'))
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM doctors WHERE id=%s", (id,))
     mysql.connection.commit()
@@ -269,6 +291,8 @@ def dele(id):
 
 @app.route('/delnur/<int:id>', methods=['GET', 'POST'])
 def delenur(id):
+    if 'email' not in session or session.get('role', '') != 'adm':
+        return redirect(url_for('signin'))
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM nurse WHERE id=%s", (id,))
     mysql.connection.commit()
@@ -276,6 +300,8 @@ def delenur(id):
 
 @app.route('/new_nurse', methods=['GET', 'POST'])
 def new_nurse():
+    if 'email' not in session or session.get('role', '') != 'adm':
+        return redirect(url_for('signin'))
     if request.method == "POST":
         name = request.form["first_name"] + ' ' + request.form["last_name"]
         email = request.form["email"]
