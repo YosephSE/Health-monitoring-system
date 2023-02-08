@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, session
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+app.secret_key = 'something'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -36,19 +37,22 @@ def signin():
         
         for doctor in doctors:
             if email in doctor and password in doctor:
+                session['email'] = email
+                session['role'] = 'doc'
                 return redirect(url_for("doctor"))
         for nurse in nurses:
             if email in nurse and password in nurse:
+                session['email'] = email
+                session['role'] = 'nur'
                 return redirect(url_for("nurse"))
         for patient in patients:
             if email in patient and password in patient:
+                session['email'] = email
+                session['role'] = 'pat'
                 return redirect(url_for('patient'))
                
     return render_template("signin.html")
 
-@app.route("/about")
-def about():
-    return render_template('about.html')
 
 @app.route("/admin_about")
 def admin_about():
@@ -56,14 +60,20 @@ def admin_about():
 
 @app.route("/doctor_about")
 def doctor_about():
+    if 'email' not in session or session.get('role', '') != 'doc':
+        return redirect(url_for('signin'))
     return render_template('doc/about.html')
 
 @app.route("/nurse_about")
 def nurse_about():
+    if 'email' not in session or session.get('role', '') != 'nur':
+        return redirect(url_for('signin'))
     return render_template('nurse/about.html')
 
 @app.route("/pat_about")
 def pat_about():
+    if 'email' not in session or session.get('role', '') != 'pat':
+        return redirect(url_for('signin'))
     return render_template('patient/about.html')
 
 @app.route('/admin')
@@ -75,23 +85,22 @@ def admin():
 
 @app.route('/doctor')
 def doctor():
-    if False:
-        return redirect(url_for('home'))
+    if 'email' not in session or session.get('role', '') != 'doc':
+        return redirect(url_for('signin'))
 
     return render_template('doc/doctor.html')
 
 @app.route('/nurse')
 def nurse():
-    if False:
-        return redirect(url_for('home'))
+    if 'email' not in session or session.get('role', '') != 'nur':
+        return redirect(url_for('signin'))
 
     return render_template('nurse/nurse.html')
 
 @app.route('/patient')
 def patient():
-    if False:
-        return redirect(url_for('home'))
-
+    if 'email' not in session or session.get('role', '') != 'pat':
+        return redirect(url_for('signin'))
     return render_template('patient/patient.html')
 
 @app.route('/<name>')
@@ -130,10 +139,6 @@ def add_patient():
     cur.close()
     return render_template('admin/admin_tool/add_patient.html', patient = patient)
 
-@app.route('/news')
-def news():
-    return render_template("news.html")
-
 @app.route('/admin_news', methods=['GET', 'POST'])
 def admin_news():
     if request.method == "POST":
@@ -153,6 +158,8 @@ def admin_news():
 
 @app.route('/doctor_news')
 def doctor_news():
+    if 'email' not in session or session.get('role', '') != 'doc':
+        return redirect(url_for('signin'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM news")
     news = cur.fetchall()
@@ -161,6 +168,8 @@ def doctor_news():
 
 @app.route('/nurse_news')
 def nurse_news():
+    if 'email' not in session or session.get('role', '') != 'nur':
+        return redirect(url_for('signin'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM news")
     news = cur.fetchall()
@@ -169,6 +178,8 @@ def nurse_news():
 
 @app.route('/patient_list')
 def patient_list():
+    if 'email' not in session or session.get('role', '') != 'doc':
+        return redirect(url_for('signin'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM patient")
     patient = cur.fetchall()
@@ -177,6 +188,8 @@ def patient_list():
 
 @app.route('/nursepatient_list')
 def nursepatient_list():
+    if 'email' not in session or session.get('role', '') != 'nur':
+        return redirect(url_for('signin'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM patient")
     patient = cur.fetchall()
@@ -185,6 +198,8 @@ def nursepatient_list():
 
 @app.route('/prescription', methods=['GET', 'POST'])
 def prescription():
+    if 'email' not in session or session.get('role', '') != 'doc':
+        return redirect(url_for('signin'))
     if request.method == "POST":
         name = request.form["patient_search"]
         pres = request.form["prescription"]
@@ -196,6 +211,8 @@ def prescription():
 
 @app.route('/recommendation', methods=['GET', 'POST'])
 def recommendation():
+    if 'email' not in session or session.get('role', '') != 'doc':
+        return redirect(url_for('signin'))
     if request.method == "POST":
         name = request.form["patient_search"]
         reco = request.form["recommendation"]
@@ -207,6 +224,8 @@ def recommendation():
 
 @app.route('/rec')
 def rec():
+    if 'email' not in session or session.get('role', '') != 'pat':
+        return redirect(url_for('signin'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM recommendation")
     rec = cur.fetchall()
@@ -215,6 +234,8 @@ def rec():
 
 @app.route('/nurse_pre')
 def nurse_pre():
+    if 'email' not in session or session.get('role', '') != 'nur':
+        return redirect(url_for('signin'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM prescriptions")
     pres = cur.fetchall()
@@ -224,6 +245,8 @@ def nurse_pre():
 
 @app.route('/stats')
 def stats():
+    if 'email' not in session or session.get('role', '') != 'pat':
+        return redirect(url_for('signin'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM doctors")
     fetchdata = cur.fetchall()
@@ -267,6 +290,10 @@ def new_nurse():
     cur.close()
     return render_template('admin/admin_tool/new_nurse.html', nurse = nurse)
 
+@app.route('/signout')
+def signout():
+    session.pop('email', None)
+    return redirect(url_for('signin'))
 
 if __name__ == "__main__":
     app.run(debug=True)

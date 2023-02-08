@@ -15,17 +15,15 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <!-- <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="navbar-brand" href="about">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="navbar-brand" href="news">News</a>
-        </li>
-      </ul> -->
+      {% if session.get('email') %}
+      <form class="form-inline my-2 my-lg-0 ml-auto">
+        <a href="{{url_for('signout')}}" class="btn btn-danger my-2 my-sm-0">Sign Out</a>
+      </form>
+      {% else %}
       <form class="form-inline my-2 my-lg-0 ml-auto">
         <a href="signin" class="btn btn-outline-success my-2 my-sm-0">Sign In</a>
       </form>
+      {% endif %}
       
     </div>
   </nav>
