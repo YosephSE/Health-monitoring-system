@@ -240,6 +240,19 @@ def recommendation():
         cur0.close()
     return render_template('doc/recommendation.html')
 
+@app.route('/feedback', methods=['GET', 'POST'])
+def feedback():
+    if 'email' not in session or session.get('role', '') != 'pat':
+        return redirect(url_for('signin'))
+    if request.method == "POST":
+        name = session['email']
+        feedb = request.form["feedback"]
+        cur0 = mysql.connection.cursor()
+        cur0.execute("INSERT INTO feedback (Name, Feedback) VALUES (%s, %s)", (name, feedb))
+        mysql.connection.commit()
+        cur0.close()
+    return render_template('patient/feedback.html')
+
 @app.route('/rec')
 def rec():
     if 'email' not in session or session.get('role', '') != 'pat':
@@ -249,6 +262,16 @@ def rec():
     rec = cur.fetchall()
     cur.close()
     return render_template('patient/rec.html', rec = rec)
+
+@app.route('/feed')
+def feed():
+    if 'email' not in session or session.get('role', '') != 'doc':
+        return redirect(url_for('signin'))
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM feedback")
+    feed = cur.fetchall()
+    cur.close()
+    return render_template('doc/feedback.html', feed = feed)
 
 @app.route('/nurse_pre')
 def nurse_pre():
