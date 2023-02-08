@@ -319,6 +319,7 @@ def new_nurse():
 @app.route('/signout')
 def signout():
     session.pop('email', None)
+    session.pop('role', None)
     return redirect(url_for('signin'))
 
 if __name__ == "__main__":

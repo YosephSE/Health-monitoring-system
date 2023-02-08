@@ -14,6 +14,23 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    {% if session.get('role')  == 'adm' %}
+      <form class="form-inline my-2 my-lg-0 ml-auto">
+        <a href="{{url_for('admin')}}" class="btn btn-success my-2 my-sm-0">Admin control panel</a>
+      </form>
+    {% elif session.get('role')  == 'doc' %}
+      <form class="form-inline my-2 my-lg-0 ml-auto">
+        <a href="{{url_for('doctor')}}" class="btn btn-success my-2 my-sm-0">Doctor control panel</a>
+      </form>
+    {% elif session.get('role')  == 'nur' %}
+      <form class="form-inline my-2 my-lg-0 ml-auto">
+        <a href="{{url_for('nurse')}}" class="btn btn-success my-2 my-sm-0">Nurse control panel</a>
+      </form>
+    {% elif session.get('role')  == 'pat' %}
+      <form class="form-inline my-2 my-lg-0 ml-auto">
+        <a href="{{url_for('patient')}}" class="btn btn-success my-2 my-sm-0">Patient control panel</a>
+      </form>
+    {% endif %}
     <div class="collapse navbar-collapse" id="navbarNav">
       {% if session.get('email') %}
       <form class="form-inline my-2 my-lg-0 ml-auto">
