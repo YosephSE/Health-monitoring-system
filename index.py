@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 from flask_mysqldb import MySQL
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.secret_key = 'something'
@@ -9,7 +10,21 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = '1212'
 app.config['MYSQL_DB'] = 'comma_patient'
 
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = 'BGPHMS@gmail.com'
+app.config['MAIL_PASSWORD'] = 'vjkcslwthvdgerod'
+
 mysql = MySQL(app)
+mail = Mail(app)
+
+def send_email(recipient_email, email_content):
+    msg = Message(subject="Welcome to Our Health Monitoring System",
+                  recipients=[recipient_email],
+                  sender=app.config.get("MAIL_USERNAME"))
+    msg.body = email_content
+    mail.send(msg)
 
 @app.route("/")
 def home():
@@ -154,6 +169,7 @@ def add_patient():
         cur1.execute("CREATE TABLE %s (day DATE NOT NULL,temperature FLOAT NOT NULL,pulse_rate INT NOT NULL,blood_pressure VARCHAR(10) NOT NULL);" % name1)
         mysql.connection.commit()
         cur1.close() 
+        send_email(email, 'msg_content')
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM patient")
     patient = cur.fetchall()
