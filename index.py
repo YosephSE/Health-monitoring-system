@@ -143,12 +143,17 @@ def add_patient():
         return redirect(url_for('signin'))
     if request.method == "POST":
         name = request.form["first_name"] + ' ' + request.form["last_name"]
+        name1 = request.form["first_name"] + request.form["last_name"]
         email = request.form["email"]
         password = request.form["password"]
         cur0 = mysql.connection.cursor()
         cur0.execute("INSERT INTO patient (Name, Email, Password) VALUES (%s, %s, %s)", (name, email, password))
         mysql.connection.commit()
-        cur0.close()    
+        cur0.close()   
+        cur1 = mysql.connection.cursor()
+        cur1.execute("CREATE TABLE %s (day DATE NOT NULL,temperature FLOAT NOT NULL,pulse_rate INT NOT NULL,blood_pressure VARCHAR(10) NOT NULL);" % name1)
+        mysql.connection.commit()
+        cur1.close() 
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM patient")
     patient = cur.fetchall()
