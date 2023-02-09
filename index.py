@@ -169,7 +169,7 @@ def add_patient():
         cur1.execute("CREATE TABLE %s (day DATE NOT NULL,temperature FLOAT NOT NULL,pulse_rate INT NOT NULL,blood_pressure VARCHAR(10) NOT NULL);" % name1)
         mysql.connection.commit()
         cur1.close() 
-        send_email(email, 'msg_content')
+        send_email(email, 'We are pleased to inform you that you have been enrolled in our health monitoring system, which will help you keep track of your health status from the comfort of your own home.Thank you for choosing us for your health monitoring needs. We look forward to helping you take control of your health.')
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM patient")
     patient = cur.fetchall()
