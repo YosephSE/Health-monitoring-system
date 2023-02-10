@@ -76,58 +76,58 @@ def signin():
                 session['role'] = 'adm'
                 return redirect(url_for('admin'))
                
-    return render_template("signin.html")
+    return render_template("index.html")
 
 
 @app.route("/admin_about")
 def admin_about():
     if 'email' not in session or session.get('role', '') != 'adm':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     return render_template('admin/about.html')
 
 @app.route("/doctor_about")
 def doctor_about():
     if 'email' not in session or session.get('role', '') != 'doc':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     return render_template('doc/about.html')
 
 @app.route("/nurse_about")
 def nurse_about():
     if 'email' not in session or session.get('role', '') != 'nur':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     return render_template('nurse/about.html')
 
 @app.route("/pat_about")
 def pat_about():
     if 'email' not in session or session.get('role', '') != 'pat':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     return render_template('patient/about.html')
 
 @app.route('/admin')
 def admin():
     if 'email' not in session or session.get('role', '') != 'adm':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
 
     return render_template('admin/admin.html')
 
 @app.route('/doctor')
 def doctor():
     if 'email' not in session or session.get('role', '') != 'doc':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
 
     return render_template('doc/doctor.html')
 
 @app.route('/nurse')
 def nurse():
     if 'email' not in session or session.get('role', '') != 'nur':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
 
     return render_template('nurse/nurse.html')
 
 @app.route('/patient')
 def patient():
     if 'email' not in session or session.get('role', '') != 'pat':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     return render_template('patient/patient.html')
 
 @app.route('/<name>')
@@ -137,7 +137,7 @@ def lost(name):
 @app.route('/new_account', methods=['GET', 'POST'])
 def new_account():
     if 'email' not in session or session.get('role', '') != 'adm':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     if request.method == "POST":
         name = request.form["first_name"] + ' ' + request.form["last_name"]
         email = request.form["email"]
@@ -155,7 +155,7 @@ def new_account():
 @app.route('/add_patient', methods=['GET', 'POST'])
 def add_patient():
     if 'email' not in session or session.get('role', '') != 'adm':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     if request.method == "POST":
         name = request.form["first_name"] + ' ' + request.form["last_name"]
         name1 = request.form["first_name"] + request.form["last_name"]
@@ -179,7 +179,7 @@ def add_patient():
 @app.route('/admin_news', methods=['GET', 'POST'])
 def admin_news():
     if 'email' not in session or session.get('role', '') != 'adm':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     if request.method == "POST":
         name = request.form["name"]
         mon = request.form["monday"]
@@ -198,7 +198,7 @@ def admin_news():
 @app.route('/doctor_news')
 def doctor_news():
     if 'email' not in session or session.get('role', '') != 'doc':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM news")
     news = cur.fetchall()
@@ -208,7 +208,7 @@ def doctor_news():
 @app.route('/nurse_news')
 def nurse_news():
     if 'email' not in session or session.get('role', '') != 'nur':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM news")
     news = cur.fetchall()
@@ -218,7 +218,7 @@ def nurse_news():
 @app.route('/patient_list')
 def patient_list():
     if 'email' not in session or session.get('role', '') != 'doc':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM patient")
     patient = cur.fetchall()
@@ -228,7 +228,7 @@ def patient_list():
 @app.route('/nursepatient_list')
 def nursepatient_list():
     if 'email' not in session or session.get('role', '') != 'nur':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM patient")
     patient = cur.fetchall()
@@ -238,7 +238,7 @@ def nursepatient_list():
 @app.route('/prescription', methods=['GET', 'POST'])
 def prescription():
     if 'email' not in session or session.get('role', '') != 'doc':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     if request.method == "POST":
         name = request.form["patient_search"]
         pres = request.form["prescription"]
@@ -251,7 +251,7 @@ def prescription():
 @app.route('/recommendation', methods=['GET', 'POST'])
 def recommendation():
     if 'email' not in session or session.get('role', '') != 'doc':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     if request.method == "POST":
         name = request.form["patient_search"]
         reco = request.form["recommendation"]
@@ -264,7 +264,7 @@ def recommendation():
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if 'email' not in session or session.get('role', '') != 'pat':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     if request.method == "POST":
         name = session['email']
         feedb = request.form["feedback"]
@@ -277,7 +277,7 @@ def feedback():
 @app.route('/rec')
 def rec():
     if 'email' not in session or session.get('role', '') != 'pat':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM recommendation")
     rec = cur.fetchall()
@@ -287,7 +287,7 @@ def rec():
 @app.route('/feed')
 def feed():
     if 'email' not in session or session.get('role', '') != 'doc':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM feedback")
     feed = cur.fetchall()
@@ -297,7 +297,7 @@ def feed():
 @app.route('/nurse_pre')
 def nurse_pre():
     if 'email' not in session or session.get('role', '') != 'nur':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM prescriptions")
     pres = cur.fetchall()
@@ -308,7 +308,7 @@ def nurse_pre():
 @app.route('/stats')
 def stats():
     if 'email' not in session or session.get('role', '') != 'pat':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM doctors")
     fetchdata = cur.fetchall()
@@ -318,7 +318,7 @@ def stats():
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
     if 'email' not in session or session.get('role', '') != 'adm':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM patient WHERE id=%s", (id,))
     mysql.connection.commit()
@@ -327,7 +327,7 @@ def delete(id):
 @app.route('/dele/<int:id>', methods=['GET', 'POST'])
 def dele(id):
     if 'email' not in session or session.get('role', '') != 'adm':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM doctors WHERE id=%s", (id,))
     mysql.connection.commit()
@@ -336,7 +336,7 @@ def dele(id):
 @app.route('/delnur/<int:id>', methods=['GET', 'POST'])
 def delenur(id):
     if 'email' not in session or session.get('role', '') != 'adm':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM nurse WHERE id=%s", (id,))
     mysql.connection.commit()
@@ -345,7 +345,7 @@ def delenur(id):
 @app.route('/new_nurse', methods=['GET', 'POST'])
 def new_nurse():
     if 'email' not in session or session.get('role', '') != 'adm':
-        return redirect(url_for('signin'))
+        return redirect(url_for('home'))
     if request.method == "POST":
         name = request.form["first_name"] + ' ' + request.form["last_name"]
         email = request.form["email"]
@@ -364,7 +364,7 @@ def new_nurse():
 def signout():
     session.pop('email', None)
     session.pop('role', None)
-    return redirect(url_for('signin'))
+    return redirect(url_for('home'))
 
 if __name__ == "__main__":
     app.run(debug=True)
