@@ -49,7 +49,7 @@
           <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
-          <th scope="col">Action</th>
+          <!-- <th scope="col">Action</th> -->
         </tr>
       </thead>
       <tbody>
@@ -59,9 +59,9 @@
           <td>{{p[1]}}</td>
           <td>{{p[2]}}</td>
 
-          <td>
+          <!-- <td>
             <a href="{{ url_for('delete', id=p[0]) }}" class="btn btn-danger">Delete</a>
-          </td>
+          </td> -->
         </tr>
         {% endfor %}
       </tbody>
