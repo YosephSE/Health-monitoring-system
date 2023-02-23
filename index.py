@@ -1,6 +1,8 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 from flask_mysqldb import MySQL
 from flask_mail import Mail, Message
+import time
+import schedule
 
 app = Flask(__name__)
 app.secret_key = 'something'
@@ -25,6 +27,20 @@ def send_email(recipient_email, email_content):
                   sender=app.config.get("MAIL_USERNAME"))
     msg.body = email_content
     mail.send(msg)
+
+# def emergency():
+#     cur = mysql.connection.cursor()
+#     cur.execute("SELECT * FROM patient_info")
+#     data = cur.fetchall()
+#     for item in data:
+#         if item[1] > 100:
+#             send_email('yoseph.kedir10@gmail.com', 'Your patient is in emergency!!!')
+
+
+# schedule.every(1).minutes.do(emergency)
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
 
 @app.route("/")
 def home():
@@ -166,10 +182,10 @@ def add_patient():
         cur0.execute("INSERT INTO patient (Name, Email, Password) VALUES (%s, %s, %s)", (name, email, password))
         mysql.connection.commit()
         cur0.close()   
-        cur1 = mysql.connection.cursor()
-        cur1.execute("CREATE TABLE %s (day DATE NOT NULL,temperature FLOAT NOT NULL,pulse_rate INT NOT NULL,blood_pressure VARCHAR(10) NOT NULL);" % name1)
-        mysql.connection.commit()
-        cur1.close() 
+        # cur1 = mysql.connection.cursor()
+        # cur1.execute("CREATE TABLE %s (day DATE NOT NULL,temperature FLOAT NOT NULL,pulse_rate INT NOT NULL,blood_pressure VARCHAR(10) NOT NULL);" % name1)
+        # mysql.connection.commit()
+        # cur1.close() 
         send_email(email, 'We are pleased to inform you that you have been enrolled in our health monitoring system, which will help you keep track of your health status from the comfort of your own home.Thank you for choosing us for your health monitoring needs. We look forward to helping you take control of your health.')
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM patient")
@@ -315,6 +331,26 @@ def stats():
     fetchdata = cur.fetchall()
     cur.close()
     return render_template('patient/stats.html', fetchdata = fetchdata)
+
+@app.route('/nurstats')
+def nurstats():
+    if 'email' not in session or session.get('role', '') != 'nur':
+        return redirect(url_for('home'))
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM patient_info")
+    fetchdata = cur.fetchall()
+    cur.close()
+    return render_template('nurse/stats.html', fetchdata = fetchdata)
+
+@app.route('/docstats')
+def docstats():
+    if 'email' not in session or session.get('role', '') != 'doc':
+        return redirect(url_for('home'))
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM patient_info")
+    fetchdata = cur.fetchall()
+    cur.close()
+    return render_template('doc/stats.html', fetchdata = fetchdata)
 
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):

@@ -5,32 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Recent cases{% endblock %}</title>
+    <title>{% block title %} Patient stats {% endblock %}</title>
 </head>
 <body>
 {% block webcontent %}
 <header class="text-center d-flex align-items-center bg-primary py-3">
-    <h1 class="text-white mx-auto">Here is the patient list</h1>
-  </header>
-  <br><br>
-  <table class="table table-striped">
+    <h1 class="text-white mx-auto">Here is sample patient recent stats</h1>
+  </header><br>
+  <table class="table table-striped table-bordered table-hover">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Action</th>
+        <th>Day and Time</th>
+        <th>Temperature</th>
+        <th>Pulse rate</th>
       </tr>
     </thead>
     <tbody>
-      {% for p in patient: %}
+      {% for data in fetchdata: %}
       <tr>
-        <td>{{p[0]}}</td>
-        <td>{{p[1]}}</td>
-        <td>{{p[2]}}</td>
-        <td><a href="docstats" class="btn btn-primary">View</a></td>
+        <td>{{data[0]}}</td>
+        <td>{{data[1]}}</td>
+        <td>{{data[2]}}</td>
       </tr>
       {% endfor %}
+      
     </tbody>
   </table>
 {% endblock %}
