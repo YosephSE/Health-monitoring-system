@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="static\img\1-removebg-preview (1).png" rel="icon">
+    <link href="static\img\1-removebg-preview (1).png" rel="icon" />
     <title>{% block title%}{% endblock %}</title>
     <link
       rel="stylesheet"
@@ -13,7 +13,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/patient"
+      <a class="navbar-brand" href="/Amhpatient"
         ><img
           src="{{ url_for('static', filename='img/favicon.ico') }}"
           alt="loading"
@@ -33,24 +33,24 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
           <li style="padding-right: 40px" class="nav-item">
-            <a class="navbar-brand" href="{{ url_for('rec') }}"
-              >Recommendation</a
+            <a class="navbar-brand" href="{{ url_for('Amhrec') }}"
+              >ምክር</a
             >
           </li>
           <li style="padding-right: 40px" class="nav-item">
-            <a class="navbar-brand" href="{{ url_for('stats') }}">Statistics</a>
+            <a class="navbar-brand" href="{{ url_for('Amhstats') }}">ስታትስቲክስ</a>
           </li>
           <li style="padding-right: 40px" class="nav-item">
-            <a class="navbar-brand" href="{{ url_for('feedback') }}">Feedback</a>
+            <a class="navbar-brand" href="{{ url_for('Amhfeedback') }}">አስተያየት</a>
           </li>
           <li style="padding-right: 40px" class="nav-item">
-            <a class="navbar-brand" href="pat_about">About Us</a>
+            <a class="navbar-brand" href="pat_Amhabout">ስለ እኛ</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0 ml-auto">
-          <a href="{{url_for('Amhpatient')}}" class="btn btn-success my-2 my-sm-0">አማርኛ</a>
-          &nbsp;&nbsp;&nbsp; 
-          <a href="{{url_for('signout')}}" class="btn btn-danger my-2 my-sm-0">Sign Out</a>
+          <a href="{{url_for('patient')}}" class="btn btn-success my-2 my-sm-0">English</a>
+          &nbsp;&nbsp;&nbsp;
+          <a href="{{url_for('signout')}}" class="btn btn-danger my-2 my-sm-0">ውጣ</a>
         </form>
       </div>
     </nav>
@@ -60,10 +60,10 @@
       <div class="container">
         <div class="row">
           <div class="col-md-3">
-            <h3 class="text-uppercase mb-4">Contact Us</h3>
+            <h3 class="text-uppercase mb-4">አግኙን</h3>
             <ul class="list-unstyled">
               <li>
-                <i class="fas fa-map-marker-alt mr-3">Addis Ababa, Ethiopia</i>
+                <i class="fas fa-map-marker-alt mr-3">አዲስ አበባ፣ ኢትዮጵያ</i>
               </li>
               <li>
                 <i class="fas fa-phone mr-3"> +251-18 28 64 58</i>
@@ -74,16 +74,12 @@
             </ul>
           </div>
           <div class="col-md-6">
-            <h3 class="text-uppercase mb-4">About</h3>
+            <h3 class="text-uppercase mb-4">ስለ እኛ</h3>
             <p>
-              Our mission is to empower individuals all around the world to take
-              control of their own health. Our website provides our users with
-              the tools to assess health status and receive personalised
-              recommendations for follow up care if they display symptoms of a
-              disease. It also addresses the needs of individuals living in
-              rural areas by an established system that connects them with the
-              doctors for remote consultation.<br />
-              Health for all !
+              የእኛ ተልዕኮ በዓለም ዙሪያ ያሉ ግለሰቦች የራሳቸውን ጤና እንዲቆጣጠሩ ማስቻል ነው። የእኛ ድረ-ገጽ
+              ለተጠቃሚዎቻችን የጤና ሁኔታን ለመገምገም እና የበሽታ ምልክቶችን ካሳዩ ለክትትል እንክብካቤ ግላዊ
+              ምክሮችን ለመቀበል መሳሪያዎችን ያቀርባል. እንዲሁም በገጠር የሚኖሩ ግለሰቦችን ፍላጎት ከሐኪሞች ጋር
+              በማገናኘት በተዘረጋ ሥርዓት የርቀት ምክክር ያደርጋል። <br>ጤና ለሁሉም!
             </p>
           </div>
         </div>

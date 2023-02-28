@@ -1,0 +1,36 @@
+{% extends 'patient/Amh-base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} የታካሚ ስታቲስቲክስ {% endblock %}</title>
+</head>
+<body>
+{% block webcontent %}
+<header class="text-center d-flex align-items-center bg-primary py-3">
+    <h1 class="text-white mx-auto">የእርስዎ የቅርብ ጊዜ ስታቲስቲክስ</h1>
+  </header><br>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>ቀን እና ሰዓት</th>
+        <th>የሙቀት መጠን</th>
+        <th>የልብ ምት መጠን</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in fetchdata: %}
+      <tr>
+        <td>{{data[0]}}</td>
+        <td>{{data[1]}}</td>
+        <td>{{data[2]}}</td>
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+  </table>
+{% endblock %}
+</body>
+</html>

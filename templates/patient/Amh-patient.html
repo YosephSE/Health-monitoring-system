@@ -1,0 +1,33 @@
+{% extends "patient/Amh-base.html"%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}የታካሚ የቁጥጥር ፓነል{% endblock %}</title>
+  </head>
+  <body>
+    {% block webcontent %}
+    <header class="text-center d-flex align-items-center bg-primary py-3">
+      <h1 class="text-white mx-auto">ይህ የታካሚዎች የቁጥጥር ፓነል ነው</h1>
+    </header>
+    <br /><br />
+    <div class="d-flex justify-content-center">
+      <div class="card" style="width: 50%">
+        <div class="card-body">
+          <h5 class="card-title">የጤና ክትትል ስርዓት</h5>
+          <p class="card-text text-justify">
+            እንኳን ወደ ጤና ክትትል ስርዓት በደህና መጡ፣ የራስዎን የጤና እና የህክምና መረጃ መከታተል ይችላሉ። እንደ
+            ታካሚ፣ የእርስዎን የጤና መዝገቦች ማግኘት እና ማስተዳደር፣ የጤና ዘገባዎችዎን መመልከት እና ስለ እድገትዎ
+            መረጃ ማግኘት ይችላሉ። እነዚህን ግብዓቶች በእርስዎ ጥቅም ላይ በማዋል፣ ጤናማ ጤንነትን ለማግኘት ከጤናዎ
+            በላይ ሆነው መቆየት እና ከጤና እንክብካቤ አቅራቢዎ ጋር በቅርበት መስራት ይችላሉ። ይህ ስርዓት በጤና ጉዞዎ
+            ውስጥ ጠቃሚ እና ጠቃሚ ሆኖ እንዳገኙት ተስፋ እናደርጋለን።
+          </p>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    {% endblock %}
+  </body>
+</html>

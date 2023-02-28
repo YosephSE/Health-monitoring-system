@@ -1,0 +1,40 @@
+{% extends 'patient/Amh-base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <title>{% block title %} ስለ እኛ {% endblock %}</title>
+  </head>
+  <body>
+    {% block webcontent %}
+    <br /><br />
+    <div class="d-flex justify-content-center">
+      <div class="card" style="width: 50%">
+        <div class="card-body">
+          <h5 class="card-title">ስለ እኛ</h5>
+          <p class="card-text text-justify">
+            "እኛ በአዲስ አበባ ኢትዮጵያ ከተለያዩ ሁለተኛ ደረጃ ትምህርት ቤቶች የተውጣጡ ተነሳሽ እና ጎበዝ ግለሰቦች
+            ስብስብ ነን። በቅርቡ በ3-ሳምንት Brighter Generation Python Programming
+            Bootcamp ላይ ተሳትፈናል፣በዚህም ክህሎቶቻችንን ባሳደግንበት እና እንደ ማህበረሰባዊ ተፅእኖ ፕሮጄክታችን
+            አንድ አካል የሆነ የጤና ክትትል ስርዓት አዘጋጅተናል። ግባችን በጤናው ዘርፍ አወንታዊ ተፅእኖ መፍጠር ብቻ
+            ሳይሆን ክህሎታችንን እና የፈጠራ ችሎታችንን ተጠቅመን በማህበረሰባችን ውስጥ ያሉ ሌሎች አንገብጋቢ ችግሮችን
+            ለመፍታት ነው። በላቀ ተነሳሽነት እና ለውጥ ለማምጣት ካለው ፍላጎት ጋር ለህብረተሰባችን መሻሻል ፈጠራ እና
+            ዘላቂ መፍትሄዎችን ለመፍጠር እንተጋለን ። ቡድናችን ቴክኖሎጂን ለማህበራዊ ጥቅም ለመጠቀም ቆርጦ ተነስቷል
+            እና ተፅዕኖ ማድረሱን ለመቀጠል ጓጉተናል።"
+          </p>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

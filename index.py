@@ -117,6 +117,12 @@ def pat_about():
         return redirect(url_for('home'))
     return render_template('patient/about.html')
 
+@app.route("/pat_Amhabout")
+def pat_Amhabout():
+    if 'email' not in session or session.get('role', '') != 'pat':
+        return redirect(url_for('home'))
+    return render_template('patient/Amh-about.html')
+
 @app.route('/admin')
 def admin():
     if 'email' not in session or session.get('role', '') != 'adm':
@@ -143,6 +149,12 @@ def patient():
     if 'email' not in session or session.get('role', '') != 'pat':
         return redirect(url_for('home'))
     return render_template('patient/patient.html')
+
+@app.route('/Amhpatient')
+def Amhpatient():
+    if 'email' not in session or session.get('role', '') != 'pat':
+        return redirect(url_for('home'))
+    return render_template('patient/Amh-patient.html')
 
 @app.route('/<name>')
 def lost(name):
@@ -289,6 +301,19 @@ def feedback():
         cur0.close()
     return render_template('patient/feedback.html')
 
+@app.route('/Amhfeedback', methods=['GET', 'POST'])
+def Amhfeedback():
+    if 'email' not in session or session.get('role', '') != 'pat':
+        return redirect(url_for('home'))
+    if request.method == "POST":
+        name = session['email']
+        feedb = request.form["feedback"]
+        cur0 = mysql.connection.cursor()
+        cur0.execute("INSERT INTO feedback (Name, Feedback) VALUES (%s, %s)", (name, feedb))
+        mysql.connection.commit()
+        cur0.close()
+    return render_template('patient/Amh-feedback.html')
+
 @app.route('/rec')
 def rec():
     if 'email' not in session or session.get('role', '') != 'pat':
@@ -298,6 +323,16 @@ def rec():
     rec = cur.fetchall()
     cur.close()
     return render_template('patient/rec.html', rec = rec)
+
+@app.route('/Amhrec')
+def Amhrec():
+    if 'email' not in session or session.get('role', '') != 'pat':
+        return redirect(url_for('home'))
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM recommendation")
+    rec = cur.fetchall()
+    cur.close()
+    return render_template('patient/Amh-rec.html', rec = rec)
 
 @app.route('/feed')
 def feed():
@@ -329,6 +364,16 @@ def stats():
     fetchdata = cur.fetchall()
     cur.close()
     return render_template('patient/stats.html', fetchdata = fetchdata)
+
+@app.route('/Amhstats')
+def Amhstats():
+    if 'email' not in session or session.get('role', '') != 'pat':
+        return redirect(url_for('home'))
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM patient_info")
+    fetchdata = cur.fetchall()
+    cur.close()
+    return render_template('patient/Amh-stats.html', fetchdata = fetchdata)
 
 @app.route('/nurstats')
 def nurstats():

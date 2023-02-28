@@ -1,0 +1,35 @@
+{% extends 'patient/Amh-base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ምክር{% endblock %}</title>
+</head>
+<body>
+{% block webcontent %}
+<header class="text-center d-flex align-items-center bg-primary py-3">
+  <h1 class="text-white mx-auto font-weight-bold">ምክር</h1>
+</header>
+<br><br>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">ስም</th>
+      <th scope="col">ምክር</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in rec: %}
+      <tr>
+        <td>{{r[0]}}</td>
+        <td>{{r[1]}}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+<br><br>
+{% endblock %}
+</body>
+</html>

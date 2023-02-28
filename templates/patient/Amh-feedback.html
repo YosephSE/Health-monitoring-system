@@ -1,0 +1,33 @@
+{% extends 'patient/Amh-base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} አስተያየት {% endblock %}</title>
+  </head>
+  <body>
+    {% block webcontent %}
+    <header class="text-center d-flex align-items-center bg-primary py-3">
+      <h1 class="text-white mx-auto">አስተያየት</h1>
+    </header>
+    <hr />
+    <form action="/feedback" method="post">
+      
+      <div class="container mt-5">
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            rows="10"
+            placeholder="አስተያየት ጻፍ"
+            name="feedback"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">ላክ</button>
+        <hr />
+      </div>
+    </form>
+    {% endblock %}
+  </body>
+</html>
