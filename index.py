@@ -1,8 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 from flask_mysqldb import MySQL
 from flask_mail import Mail, Message
-import time
-import schedule
 
 app = Flask(__name__)
 app.secret_key = 'something'
