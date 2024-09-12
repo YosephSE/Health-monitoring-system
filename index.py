@@ -19,8 +19,8 @@ app.config['MAIL_PASSWORD'] = 'vjkcslwthvdgerod'
 mysql = MySQL(app)
 mail = Mail(app)
 
-def send_email(recipient_email, email_content):
-    msg = Message(subject="Welcome to Our Health Monitoring System",
+def send_email(subject, recipient_email, email_content):
+    msg = Message(subject = subject,
                   recipients=[recipient_email],
                   sender=app.config.get("MAIL_USERNAME"))
     msg.body = email_content
@@ -172,7 +172,7 @@ def new_account():
         cur0.execute("INSERT INTO doctors (Name, Email, Password) VALUES (%s, %s, %s)", (name, email, password))
         mysql.connection.commit()
         cur0.close()
-        send_email(email, 'We are pleased to inform you that you have been added to the hospitals health monitoring system.') 
+        send_email('Welcome Doctor', email, 'We are pleased to inform you that you have been added to the hospitals health monitoring system.') 
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM doctors")
     doctors = cur.fetchall()
@@ -196,7 +196,7 @@ def add_patient():
         # cur1.execute("CREATE TABLE %s (day DATE NOT NULL,temperature FLOAT NOT NULL,pulse_rate INT NOT NULL,blood_pressure VARCHAR(10) NOT NULL);" % name1)
         # mysql.connection.commit()
         # cur1.close() 
-        send_email(email, 'We are pleased to inform you that you have been enrolled in our health monitoring system, which will help you keep track of your health status from the comfort of your own home.Thank you for choosing us for your health monitoring needs. We look forward to helping you take control of your health.')
+        send_email('Welcome Patient', email, 'We are pleased to inform you that you have been enrolled in our health monitoring system, which will help you keep track of your health status from the comfort of your own home.Thank you for choosing us for your health monitoring needs. We look forward to helping you take control of your health.')
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM patient")
     patient = cur.fetchall()
@@ -434,7 +434,7 @@ def new_nurse():
         cur0.execute("INSERT INTO nurse (Name, Email, Password) VALUES (%s, %s, %s)", (name, email, password))
         mysql.connection.commit()
         cur0.close()
-        send_email(email, 'We are pleased to inform you that you have been added to the hospitals health monitoring system.') 
+        send_email('Welcome Nurse', email, 'We are pleased to inform you that you have been added to the hospitals health monitoring system.') 
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM nurse")
     nurse = cur.fetchall()
@@ -449,4 +449,3 @@ def signout():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
