@@ -16,15 +16,15 @@
 <table class="table table-striped">
   <thead class="thead-light">
     <tr>
-      <th scope="col">Name</th>
+      <th scope="col">Email</th>
       <th scope="col">Feedback</th>
     </tr>
   </thead>
   <tbody>
     {% for f in feed: %}
       <tr>
-        <td>{{f[0]}}</td>
         <td>{{f[1]}}</td>
+        <td>{{f[2]}}</td>
       </tr>
       {% endfor %}
   </tbody>
