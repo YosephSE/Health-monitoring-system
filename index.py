@@ -5,10 +5,10 @@ from flask_mail import Mail, Message
 app = Flask(__name__)
 app.secret_key = 'something'
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '1212'
-app.config['MYSQL_DB'] = 'comma_patient'
+app.config['MYSQL_HOST'] = 'sql7.freesqldatabase.com'
+app.config['MYSQL_USER'] = 'sql7731106'
+app.config['MYSQL_PASSWORD'] = 'GYuPgfN1Cx'
+app.config['MYSQL_DB'] = 'sql7731106'
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
